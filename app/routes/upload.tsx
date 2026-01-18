@@ -1,12 +1,27 @@
 import React, { useState } from 'react'
 import Navbar from '~/Components/Navbar'
+import UploadFile from '~/Components/UploadFile';
 
 const upload = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [statusText, setStatusText] = useState("Uploading your resume...");
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {}
-  return (
+    const [file, setFile] = useState<File | null>(null);    
+    const onFileSelect = (file: File) => {
+        console.log("Selected file:", file);
+        setFile(file);
+        // You can add further processing here if needed
+    }
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget.closest('form');
+        if (!form) return;
+        const formData = new FormData(form);
+        const companyName = formData.get('company-name') as string;
+        const jobTitle = formData.get('job-title') as string;
+        const jobDescription = formData.get('job-description') as string;
+        console.log({companyName, jobTitle, jobDescription, file});
+    }
+    return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
         <Navbar />
       <section className="main-section">
@@ -37,7 +52,7 @@ const upload = () => {
                 </div>
                 <div className='form-div'>
                     <label htmlFor="uploader">Upload Resume</label>
-                    <div>Upload</div>
+                    <UploadFile onFileSelect={onFileSelect} />
                 </div>
                 <button className='primary-button' type="submit">Analyse Resume</button>
                 </form>
