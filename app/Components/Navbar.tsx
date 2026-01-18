@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className='navbar'>
         <Link to={"/"}>
             <p className='text-2xl font-bold text-gradient'> SMART CV</p>
         </Link>
