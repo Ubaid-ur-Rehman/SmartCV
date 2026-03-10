@@ -14,6 +14,7 @@ const resume = () => {
 
     useEffect(() => {
         const loadResume = async () => {
+            debugger
             const resume = await kv.get(`resume:${id}`);
             if(!resume) return;
             const resumeData = JSON.parse(resume);
@@ -50,7 +51,7 @@ const resume = () => {
             </div>
            )}
         </section>
-        <section className='feedback-section'>
+        <section className='feedback-section flex-1 overflow-y-auto sticky top-0 justify-center items-center h-full w-full max-w-4xl mx-auto px-8 py-16'>
             <h2 className='text-black font-bold text-4xl'>Resume feedback</h2>
             {feedback ? (
                 <div className='flex flex-col gap-6 mt-8 fade-in animate-in duration-1000'>
